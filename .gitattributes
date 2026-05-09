@@ -1,0 +1,4 @@
+# Ensure shell scripts always use LF line endings on checkout
+# (Windows CRLF would break the shebang line inside Linux containers)
+*.sh    text eol=lf
+*.json  text eol=lf
