@@ -1,28 +1,84 @@
 {
+  "log": { "loglevel": "warning" },
   "inbounds": [
     {
       "port": 443,
       "protocol": "vless",
       "settings": {
-        "clients": [
-          {
-            "id": "550e8400-e29b-41d4-a716-446655440000"
-          }
-        ],
+        "clients": [{ "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567801" }],
         "decryption": "none"
       },
       "streamSettings": {
         "network": "xhttp",
-        "xhttpSettings": {
-          "mode": "packet-up",
-          "path": "/"
-        }
-      }
+        "xhttpSettings": { "mode": "packet-up", "path": "/xhttp-pu" }
+      },
+      "tag": "vless-xhttp-packetup"
+    },
+    {
+      "port": 8080,
+      "protocol": "vless",
+      "settings": {
+        "clients": [{ "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567802" }],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "xhttp",
+        "xhttpSettings": { "mode": "stream-up", "path": "/xhttp-su" }
+      },
+      "tag": "vless-xhttp-streamup"
+    },
+    {
+      "port": 8880,
+      "protocol": "vless",
+      "settings": {
+        "clients": [{ "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567803" }],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "ws",
+        "wsSettings": { "path": "/ws" }
+      },
+      "tag": "vless-ws"
+    },
+    {
+      "port": 9090,
+      "protocol": "vmess",
+      "settings": {
+        "clients": [{ "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567804", "alterId": 0 }]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "wsSettings": { "path": "/vmess-ws" }
+      },
+      "tag": "vmess-ws"
+    },
+    {
+      "port": 9443,
+      "protocol": "vless",
+      "settings": {
+        "clients": [{ "id": "a1b2c3d4-e5f6-7890-abcd-ef1234567805" }],
+        "decryption": "none"
+      },
+      "streamSettings": {
+        "network": "grpc",
+        "grpcSettings": { "serviceName": "grpc" }
+      },
+      "tag": "vless-grpc"
+    },
+    {
+      "port": 7777,
+      "protocol": "trojan",
+      "settings": {
+        "clients": [{ "password": "a1b2c3d4-e5f6-7890-abcd-ef1234567806" }]
+      },
+      "streamSettings": {
+        "network": "ws",
+        "wsSettings": { "path": "/trojan-ws" }
+      },
+      "tag": "trojan-ws"
     }
   ],
   "outbounds": [
-    {
-      "protocol": "freedom"
-    }
+    { "protocol": "freedom", "tag": "direct" }
   ]
 }
