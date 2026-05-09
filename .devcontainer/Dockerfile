@@ -1,17 +1,19 @@
 FROM debian:bookworm-slim
 
-COPY install.sh /app/install.sh
-COPY start.sh   /app/start.sh
-
 WORKDIR /app
 
 RUN apt-get update && apt-get install -y --no-install-recommends \
     bash git curl wget unzip tzdata openssl ca-certificates \
     && rm -rf /var/lib/apt/lists/*
 
-RUN chmod +x /app/install.sh && /app/install.sh
-RUN chmod +x /app/start.sh
+# Copy scripts and static config
+COPY install.sh ./install.sh
+COPY start.sh   ./start.sh
+COPY config.json /etc/config.json
 
-# start.sh writes /etc/config.json at runtime (needs CODESPACE_NAME env var)
-# then launches xray with that config
+# Make scripts executable and install xray
+RUN chmod +x ./install.sh ./start.sh && ./install.sh
+
+# start.sh rewrites /etc/config.json at runtime with random UUIDs
+# and the real CODESPACE_NAME hostname, then launches xray
 CMD ["/app/start.sh"]
