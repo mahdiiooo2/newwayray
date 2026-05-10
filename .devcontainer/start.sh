@@ -17,12 +17,12 @@ UUID6=$(gen_uuid)   # Trojan WebSocket       (port 7777)
 IP1="63.141.252.203"
 IP2="50.7.5.83"
 IP3="94.130.50.12"
-IP4="50.7.87.4"
+IP4="49.12.192.100"
 IP5="144.76.1.88"
 IP6="85.10.207.48"
-IP7="95.216.69.37"
+IP7="5.9.100.100"
 IP8="94.130.13.19"
-IP9="94.130.33.41"
+IP9="51.38.100.100"
 IP10="204.12.196.34"
 
 # ── write the xray config with ALL inbounds ──────────────────────────────────
@@ -182,10 +182,6 @@ print_links "VLESS-xHTTP-PacketUp" \
   "vless://${UUID1}@__IP__:443?encryption=none&security=tls&sni=${H443}&host=${H443}&type=xhttp&path=%2Fxhttp-pu&mode=packet-up#VLESS-xHTTP-PacketUp"
 echo ""
 
-print_links "VLESS-xHTTP-StreamUp" \
-  "vless://${UUID2}@__IP__:443?encryption=none&security=tls&sni=${H8080}&host=${H8080}&type=xhttp&path=%2Fxhttp-su&mode=stream-up#VLESS-xHTTP-StreamUp"
-echo ""
-
 print_links "VLESS-WS" \
   "vless://${UUID3}@__IP__:443?encryption=none&security=tls&sni=${H8880}&host=${H8880}&type=ws&path=%2Fws#VLESS-WebSocket"
 echo ""
@@ -195,13 +191,6 @@ for IP in "$IP1" "$IP2" "$IP3" "$IP4" "$IP5" "$IP6" "$IP7" "$IP8" "$IP9" "$IP10"
 done
 echo ""
 
-print_links "VLESS-gRPC" \
-  "vless://${UUID5}@__IP__:443?encryption=none&security=tls&sni=${H9443}&host=${H9443}&type=grpc&serviceName=grpc#VLESS-gRPC"
-echo ""
-
-print_links "Trojan-WS" \
-  "trojan://${UUID6}@__IP__:443?security=tls&sni=${H7777}&host=${H7777}&type=ws&path=%2Ftrojan-ws#Trojan-WS"
-echo ""
 
 echo "━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━"
 echo "  Each config has its own unique UUID (randomized at startup)"
